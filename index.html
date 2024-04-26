@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vehiculos</title>
+  <link rel="stylesheet" href="resources/css/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="resources/css/fontawesome-free-6.5.1-web/css/all.min.css">
+  <script src="resources/js/jquery-3.7.1.min.js"></script>
+  <script src="resources/js/popper.min.js"></script>
+  <script src="resources/js/bootstrap/bootstrap.min.js"></script>
+</head>
+
+<body style="background-color: #e9ecef;">
+  <div class="jumbotron">
+    <div class="row d-flex align-items-center pt-4" style="background-image: url('media/img/banner.png');height: 200px;">
+      <div class="col-12 text-center d-flex justify-content-center">
+        <h1 class="text-white p-3 rounded-pill" style="background-color: rgba(0, 0, 0, 0.5);">
+          <i class="fas fa-gamepad"></i> CRUD de Videojuegos
+        </h1>
+      </div>
+      <div class="col-12 text-right">
+        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#mdl_registro_vgame" id="btn_nuevo_vgame">
+          <i class="fas fa-plus"></i> Nuevo videojuego
+        </button>
+      </div>
+    </div>
+    <div class="row">
+    </div>
+    <div class="row mt-3">
+      <div class="col-12">
+        <table class="table table-striped table-hover" id="tabla_vgames">
+          <thead class="bg-warning">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Sinopsis</th>
+              <th scope="col">Categoría</th>
+              <th scope="col">Plataforma</th>
+              <th scope="col">Productor</th>
+              <th scope="col">Desarrolladora</th>
+              <th scope="col">Fecha de lanzamiento</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tb_vehiculos"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="mdl_registro_vgame" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="mdl_title_registro">
+            <i class="fas fa-plus"></i> Registrar nuevo videojuego
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="frm_registro_vgame" name="frm_registro_vgame" onsubmit="return false" autocomplete="off">
+            <input type="hidden" id="id" name="id">
+            <div class="row">
+              <div class="col-6">
+                <label>Nombre:</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                      <i class="fas fa-id-card"></i>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Nombre" name="name" id="name" required>
+                </div>
+              </div>
+              <div class="col-6">
+                <label>Sinopsis:</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                      <i class="fas fa-pen-clip"></i>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Sinopsis" name="synopsis" id="synopsis" required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <label>Fecha de lanzamiento:</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                      <i class="fas fa-calendar"></i>
+                    </span>
+                  </div>
+                  <input type="date" class="form-control" name="release_date" id="release_date" required>
+                </div>
+              </div>
+              <div class="col-6">
+                <label>Categoría:</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                      <i class="fas fa-icons"></i>
+                    </span>
+                  </div>
+                  <select class="form-control" name="category" id="category" required>
+                    <option value="">Seleccione una Categoría</option>
+                    <option value="1">Acción</option>
+                    <option value="2">Aventura</option>
+                    <option value="3">Deportes</option>
+                    <option value="3">Estrategia</option>
+                    <option value="4">Otros</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <label>Plataformas:</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                      <i class="fas fa-layer-group"></i>
+                    </span>
+                  </div>
+                  <select class="form-control" name="plataform" id="plataform" required>
+                    <option value="">Seleccione una plataforma</option>
+                    <option value="1">Consola</option>
+                    <option value="2">PC</option>
+                    <option value="3">Movil</option>
+                    <option value="4">Otros</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-6">
+                <label>Productor:</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                      <i class="fas fa-copyright"></i>
+                    </span>
+                  </div>
+                  <select class="form-control" name="publisher" id="publisher" required>
+                    <option value="">Seleccione un productor</option>
+                    <option value="1">Nintendo</option>
+                    <option value="2">Play Station</option>
+                    <option value="3">XBOX</option>
+                    <option value="4">Móvil</option>
+                    <option value="5">Otros</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <label>Desarrolladora:</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                      <i class="fas fa-code"></i>
+                    </span>
+                  </div>
+                  <select class="form-control" name="developers" id="developers" required>
+                    <option value="">Seleccione una desarrolladora</option>
+                    <option value="1">Tencet</option>
+                    <option value="2">Riot Games</option>
+                    <option value="3">Epic Games</option>
+                    <option value="4">Sony IE</option>
+                    <option value="5">XBOX GS</option>
+                    <option value="6">Otros</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">
+            <i class="fas fa-times"></i> Cerrar
+          </button>
+          <button type="submit" class="btn btn-success" form="frm_registro_car" id="btn_guardar_vgame">
+            <i class="fas fa-save"></i> Guardar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="app/controllers/index.js"></script>
+</body>
+
+</html>
